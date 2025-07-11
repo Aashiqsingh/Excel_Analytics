@@ -33,8 +33,8 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-        const response = await axios.post("https://excel-analytics-ruddy.vercel.app/user/register", formData);
-        console.log(".......",response);
+        const response = await axios.post("http://localhost:3000/user/register", formData);
+        console.log(response);
         if (response.status === 201) {
             toast.success('User Registered Successfully', {
                 position: "top-right",
