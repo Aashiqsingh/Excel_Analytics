@@ -26,7 +26,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData); // handle login logic here
-        const resopnse = await axios.post("https://excel-analytics-Node.onrender.com/user/login", formData);
+        const resopnse = await axios.post("https://excel-analytics-yl67.onrender.com/user/login", formData);
         console.log(resopnse);
         if (resopnse.status === 200) {
             toast.success('Login Successfully...', {
