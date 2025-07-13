@@ -33,7 +33,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-        const response = await axios.post("https://excel-analytics-ruddy.vercel.app/user/register", formData);
+        const response = await axios.post("https://Node.onrender/user/register", formData);
         console.log(".......",response);
         if (response.status === 201) {
             toast.success('User Registered Successfully', {
