@@ -3,10 +3,10 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-app.use(cors({
-    origin:"https://excel-analytics-ruddy.vercel.app",
-    credentials: true,
-}));
+app.use(cors(
+    // origin:"https://excel-analytics-ruddy.vercel.app",
+    // credentials: true,
+));
 app.use(express.json());
 
 
