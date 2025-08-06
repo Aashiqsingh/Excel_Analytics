@@ -9,7 +9,7 @@ const addUser = async (req, res) => {
         const { email, password } = req.body;
 
         // Check if user already exists
-        const existingUser = await userModel.findOne({ email:email });
+        const existingUser = await userModel.findOne({ email });
         if (existingUser) {
             return res.status(400).json({
                 message: "User already exists"
