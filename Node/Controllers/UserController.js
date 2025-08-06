@@ -1,5 +1,7 @@
 const userModel = require("../Models/UserModel");
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const secret = "secret";
 
 
 const addUser = async (req, res) => {
@@ -7,7 +9,7 @@ const addUser = async (req, res) => {
         const { email, password } = req.body;
 
         // Check if user already exists
-        const existingUser = await userModel.findOne({ email });
+        const existingUser = await userModel.findOne({ email:email });
         if (existingUser) {
             return res.status(400).json({
                 message: "User already exists"
@@ -26,7 +28,7 @@ const addUser = async (req, res) => {
             message: "User added successfully",
             data: newUser
         });
-        
+
     } catch (err) {
         console.log(err);
         return res.status(500).json({
@@ -42,22 +44,27 @@ const loginUser = async (req, res) => {
 
         const user = await userModel.findOne({ email });
         if (!user) {
-            return res.status(400).json({
+            return res.status(404).json({
                 message: "User not found",
                 data: null
             });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
+        
+
         if (!isMatch) {
-            return res.status(401).json({
+            return res.status(404).json({
                 message: "Invalid password",
                 data: null
             });
         }
 
+        const token = jwt.sign({ email: user.email }, secret, { expiresIn: '1h' });
+        console.log("token..........", token);
         return res.status(200).json({
             message: "Login successful",
+            token: token,
             data: user
         });
 
